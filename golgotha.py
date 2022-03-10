@@ -17,8 +17,6 @@ def dprint(*args, **kwargs):
 source_string = ""
 line_index = 1
 operator_rules = []
-parenthor_rules = []
-
 def main():
   global line_index
   global source_string
@@ -37,17 +35,12 @@ def main():
               dprint(rule)
               rule[0] = re.escape(rule[0]) # first, we escape
               dprint(rule[0])
-              rule[0] = regex.sub("(\d)", r"[^\\S\\r\\n]*(?P<arg\1>\\w+|\(.*\))[^\\S\\r\\n]*", rule[0]) #now, we massage the string to be the regex we want #TODO: real nesting parens, using the "regex" package and something like \(([^()]|(?R))*\)
+              rule[0] = regex.sub("(\d)", r"[^\\S\\r\\n]*(?P<arg\1>\\w+|\(.*\))[^\\S\\r\\n]*", rule[0]) #now, we massage the string to be the regex we want #TODO: real nesting parens, using the "regex" package and something like \(([^()]|(?R))*\). Also for [] and {}.
               dprint(rule[0])
               rule[1] = re.sub("(\d)", r"\\g<arg\1>", rule[1]) #rhs of rule uses proper subs, using \g form for maximum disambiguation
               dprint(rule)
               operator_rules.append(rule)
               
-            elif line[0] == '🅿':
-              dprint("parenthor rule line encountered")
-              rule = line[1:].strip('\n').split('🔚')
-              dprint(rule)
-              parenthor_rules.append(rule)
             else:
               source_string += line #I don't remember if string += is valid in python
           for rule in operator_rules:
