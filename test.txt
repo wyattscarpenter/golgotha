@@ -1,0 +1,24 @@
+hello yes
+this is test
+🔣1_2🔜2-1
+one+two_three+four
+(one+two)_(three+four)
+((one)+two)_((three)+four)
+this_( that(ok) )
+(blah
+blah
+blah)_7
+[one+two]_[three+four]
+
+🔣1?2:3🔜if(1){2}else{3}
+0?foo:bar
+1_2
+do some stuff
+🔣1$2🔜2-1 
+🔣1⋅2🔜1.dot(2)
+🅿(🔚)
+🅿[🔚]
+🅿{🔚}
+1$2
+come$to
+1⋅2
