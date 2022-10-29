@@ -1,0 +1,19 @@
+hello yes
+this is test
+one+three-two+four
+(three+four)-(one+two)
+((three)+four)-((one)+two)
+( that(ok) )-this
+ test-space  //good enough!
+fortunately is - this  fine
+7-(blah
+blah
+blah)
+[three+four]-[one+two]
+
+if(0){foo}else{bar}
+2-1
+do some stuff
+2-1 
+to-come 
+1.dot(2)

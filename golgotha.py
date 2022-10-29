@@ -2,10 +2,13 @@
 
 import sys
 import re
+import os
 try:
   import regex
 except:
-  pass #TODO: I'm debating doing a shell command to install the regex package here
+  os.system("pip install regex")
+  import regex
+
 def eprint(*args, **kwargs):
   print(f"line {line_index}:",*args, file=sys.stderr, **kwargs)
 
@@ -17,11 +20,19 @@ def dprint(*args, **kwargs):
 source_string = ""
 line_index = 1
 operator_rules = []
+
+def parenthor(left, right, name=r"recursor\1"):
+  l = re.escape(left)
+  r = re.escape(right)
+  p = "%s[^%s%s]*(?&%s)?[^%s%s]*%s" % (l, l, r, name, l, r, r)
+  dprint("paren now!", p)
+  return p
+
 def main():
   global line_index
   global source_string
   if len(sys.argv) <= 1:
-    print("USAGE: golgotha filenames_to_tranform...")
+    print("USAGE: golgotha names_of_files_to_tranform...")
   else:
     for filename in sys.argv[1:]:
       with open("golgotha."+filename,"w",encoding='utf-8') as outfile:
@@ -29,21 +40,27 @@ def main():
           for line in infile:
             line_index += 1
             if line[0] == '🔣':
-              #WARNING: this code contains regex operations on text that will be used for regex operations later. So, be wary of that.
+              #READING COMPREHENSION WARNING: this code contains regex operations on text that will be used for regex operations later. So, be wary of that.
               dprint("operator rule line encountered")
               rule = line[1:].strip('\n').split('🔜')
               dprint(rule)
-              rule[0] = re.escape(rule[0]) # first, we escape
+              #Now, we are going to turn rule[0] from a regular string into a valid regex that does what we want
+              rule[0] = re.escape(rule[0]) # first, we escape any literal characters from the string that would otherwise be interpreted as special regex characters, because we haven't put any special regex characters in yet.
               dprint(rule[0])
-              rule[0] = regex.sub("(\d)", r"[^\\S\\r\\n]*(?P<arg\1>\\w+|\(.*\))[^\\S\\r\\n]*", rule[0]) #now, we massage the string to be the regex we want #TODO: real nesting parens, using the "regex" package and something like \(([^()]|(?R))*\). Also for [] and {}.
+              rule[0] = regex.sub("(\d+)",
+                r"(?P<frontspace\1>[^\S\r\n]*)"+
+                r"(?P<arg\1>\w+"+r"|(?P<recursor\1>"+parenthor("(",")")+"|"+parenthor("[","]") + "|" + parenthor("{","}")+r"))"+
+                r"(?P<rearspace\1>[^\S\r\n]*)",
+                rule[0]
+              ) #Now, we massage the string to be the regex we want.
               dprint(rule[0])
-              rule[1] = re.sub("(\d)", r"\\g<arg\1>", rule[1]) #rhs of rule uses proper subs, using \g form for maximum disambiguation
+              rule[1] = re.sub("(\d+)", r"\\g<frontspace\1>\\g<arg\1>\\g<rearspace\1>", rule[1]) #rhs of rule uses proper subs, using \g form for maximum disambiguation
               dprint(rule)
               operator_rules.append(rule)
               
             else:
-              source_string += line #I don't remember if string += is valid in python
+              source_string += line
           for rule in operator_rules:
-                source_string = regex.sub(rule[0], rule[1], source_string) #TODO: figure out if this works or if I need a global tag or whatever
+            source_string = regex.sub(rule[0], rule[1], source_string)
           outfile.write(source_string)
 main()

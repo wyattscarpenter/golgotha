@@ -5,6 +5,8 @@ one+two_three+four
 (one+two)_(three+four)
 ((one)+two)_((three)+four)
 this_( that(ok) )
+space $ test//good enough!
+fortunately this $ is fine
 (blah
 blah
 blah)_7
@@ -16,9 +18,6 @@ blah)_7
 do some stuff
 🔣1$2🔜2-1 
 🔣1⋅2🔜1.dot(2)
-🅿(🔚)
-🅿[🔚]
-🅿{🔚}
 1$2
 come$to
 1⋅2
