@@ -59,4 +59,6 @@ def main():
           for rule in operator_rules:
             source_string = regex.sub(rule[0], rule[1], source_string)
           outfile.write(source_string)
-main()
+
+if __name__ == "__main__"
+  main()
