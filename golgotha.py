@@ -44,7 +44,6 @@ def main():
               #Now, we are going to turn rule[0] from a regular string into a valid regex that does what we want
               rule[0] = re.escape(rule[0]) # first, we escape any literal characters from the string that would otherwise be interpreted as special regex characters, because we haven't put any special regex characters in yet.
               dprint(rule[0])
-              print(regex.__version__)
               rule[0] = regex.sub(r"(\d+)",
                 r"(?P<frontspace\1>[^\\S\\r\\n]*)"+ #note that we have to \ the \S because otherwise regex tries to interpret it here, leading to a bad escape error.
                 r"(?P<arg\1>\\w+"+r"|(?P<recursor\1>"+parenthor("(",")")+"|"+parenthor("[","]") + "|" + parenthor("{","}")+r"))"+
