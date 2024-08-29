@@ -1,1 +1,1 @@
-golgotha.py test.txt && wsl sdiff expected.golgotha.test.txt golgotha.test.txt
+golgotha.py test.txt && wsl sdiff expected.golgotha.test.txt golgotha.test.txt || cat test.txt

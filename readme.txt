@@ -29,7 +29,9 @@ Golgotha does not recognize strings or quotation marks in any particular way. Hy
 
 Golgotha has been engineered to be easy to implement more than anything else. The current implementation is in Python 3. But a faster implementation would probably be easy to make in another language, and probably should be made before Golgotha is integrated into your build pipeline.
 
-Golgotha is implicitly UTF-8. Also implicitly, we just assume you don't want to deal with any Golgotha rule symbols (🔣🔜) in the non-Golgotha parts of your program. There is currently no explicit mechanism to deal with that. However, Golgotha symbols on lines not beginning with 🔣 will be ignored, so it's a constrained edge case.
+Golgotha reads files in UTF-8 outputs in UTF-8. It reads files of any line-termination style (the exact bounds on this are some python implementation details I don't know offhand) and outputs files as LF (not CRLF) line-terminated. As God intended. (I would support both, but that was too much bother.)
+
+Implicitly, we just assume you don't want to deal with any Golgotha rule symbols (🔣🔜) in the non-Golgotha parts of your program. There is currently no explicit mechanism to deal with that. However, Golgotha symbols on lines not beginning with 🔣 will be ignored, so it's a constrained edge case.
 
 Golgotha+ is an UNIMPLEMENTED extension to Golgotha which would allow one to set the word character set with 🔠 lines (default 🔠ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_ except actually the default would be Unicode \w behavior probably, which would be much harder to replicate with a 🔠 line); the argument (in 🔣 rule lines) character set with 🔢 lines (default 0123456789); and the set of parenthors with 🅿🔚 lines (default 🅿(🔚), 🅿[🔚], and 🅿{🔚}). I was going to implement Golgotha+ but then I realized that no one was going to use this software anyway so the use case was literally 0. An instance of Golgotha with Golgotha+ rules applied to overwrite defaults may be called a Golgothoid.
 

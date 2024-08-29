@@ -8,7 +8,7 @@ import regex
 def eprint(*args, **kwargs):
   print(f"line {line_index}:",*args, file=sys.stderr, **kwargs)
 
-debug = True #False #True
+debug = False #False #True
 
 def dprint(*args, **kwargs):
   if debug: eprint(*args, **kwargs)
@@ -28,11 +28,12 @@ def main():
   global line_index
   global source_string
   if len(sys.argv) <= 1:
-    print("USAGE: golgotha names_of_files_to_tranform...")
+    print("USAGE: golgotha names_of_files_to_tranform...", file=sys.stderr) # Note that the program does not handle stdin. I just didn't bother to do that. But it would probably be easy.
+    exit(2)
   else:
     for filename in sys.argv[1:]:
-      with open("golgotha."+filename,"w",encoding='utf-8') as outfile:
-        with open(filename,"r",encoding='utf-8') as infile:
+      with open("golgotha."+filename, "wb") as outfile:
+        with open(filename, "r", encoding='utf-8') as infile:
           for line in infile:
             line_index += 1
             if line[0] == '🔣':
@@ -43,10 +44,11 @@ def main():
               #Now, we are going to turn rule[0] from a regular string into a valid regex that does what we want
               rule[0] = re.escape(rule[0]) # first, we escape any literal characters from the string that would otherwise be interpreted as special regex characters, because we haven't put any special regex characters in yet.
               dprint(rule[0])
+              print(regex.__version__)
               rule[0] = regex.sub(r"(\d+)",
-                r"(?P<frontspace\1>[^\S\r\n]*)"+
-                r"(?P<arg\1>\w+"+r"|(?P<recursor\1>"+parenthor("(",")")+"|"+parenthor("[","]") + "|" + parenthor("{","}")+r"))"+
-                r"(?P<rearspace\1>[^\S\r\n]*)",
+                r"(?P<frontspace\1>[^\\S\\r\\n]*)"+ #note that we have to \ the \S because otherwise regex tries to interpret it here, leading to a bad escape error.
+                r"(?P<arg\1>\\w+"+r"|(?P<recursor\1>"+parenthor("(",")")+"|"+parenthor("[","]") + "|" + parenthor("{","}")+r"))"+
+                r"(?P<rearspace\1>[^\\S\\r\\n]*)",
                 rule[0]
               ) #Now, we massage the string to be the regex we want.
               dprint(rule[0])
@@ -58,7 +60,7 @@ def main():
               source_string += line
           for rule in operator_rules:
             source_string = regex.sub(rule[0], rule[1], source_string)
-          outfile.write(source_string)
+          outfile.write(bytes(source_string, encoding='utf-8'))
 
 if __name__ == "__main__":
   main()
