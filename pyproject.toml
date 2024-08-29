@@ -2,7 +2,11 @@
 name = "golgotha"
 version = "0.0.2"
 dependencies = ["regex"]
+requires-python = ">= 3"
 authors = [
+  {name = "Wyatt S Carpenter"}
+]
+maintainers = [
   {name = "Wyatt S Carpenter"}
 ]
 description = "A preprocessor to define new operators in any programming language."
@@ -19,3 +23,15 @@ classifiers = [
   "Topic :: Software Development :: Code Generators",
   "Topic :: Software Development :: Pre-processors",
 ]
+
+[project.urls]
+Homepage = "https://github.com/wyattscarpenter/golgotha"
+Documentation = "https://github.com/wyattscarpenter/golgotha/blob/master/readme.txt"
+Repository = "https://github.com/wyattscarpenter/golgotha.git"
+Issues = "https://github.com/wyattscarpenter/golgotha/issues"
+
+[project.scripts]
+golgotha = "golgotha:main"
+
+[project.gui-scripts]
+golgotha = "golgotha:main"

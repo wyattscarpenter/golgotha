@@ -16,7 +16,7 @@ blah)_7
 0?foo:bar
 1_2
 do some stuff
-🔣1$2🔜2-1 
+🔣1$2🔜2-1
 🔣1⋅2🔜1.dot(2)
 1$2
 come$to
