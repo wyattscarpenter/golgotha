@@ -43,14 +43,14 @@ def main():
               #Now, we are going to turn rule[0] from a regular string into a valid regex that does what we want
               rule[0] = re.escape(rule[0]) # first, we escape any literal characters from the string that would otherwise be interpreted as special regex characters, because we haven't put any special regex characters in yet.
               dprint(rule[0])
-              rule[0] = regex.sub("(\d+)",
+              rule[0] = regex.sub(r"(\d+)",
                 r"(?P<frontspace\1>[^\S\r\n]*)"+
                 r"(?P<arg\1>\w+"+r"|(?P<recursor\1>"+parenthor("(",")")+"|"+parenthor("[","]") + "|" + parenthor("{","}")+r"))"+
                 r"(?P<rearspace\1>[^\S\r\n]*)",
                 rule[0]
               ) #Now, we massage the string to be the regex we want.
               dprint(rule[0])
-              rule[1] = re.sub("(\d+)", r"\\g<frontspace\1>\\g<arg\1>\\g<rearspace\1>", rule[1]) #rhs of rule uses proper subs, using \g form for maximum disambiguation
+              rule[1] = re.sub(r"(\d+)", r"\\g<frontspace\1>\\g<arg\1>\\g<rearspace\1>", rule[1]) #rhs of rule uses proper subs, using \g form for maximum disambiguation
               dprint(rule)
               operator_rules.append(rule)
               
