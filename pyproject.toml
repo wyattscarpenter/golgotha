@@ -1,6 +1,6 @@
 [project]
 name = "golgotha"
-version = "0.0.6"
+version = "1.0.0"
 dependencies = ["regex"]
 requires-python = ">= 3"
 authors = [
