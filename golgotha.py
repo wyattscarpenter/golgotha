@@ -3,11 +3,7 @@
 import sys
 import re
 import os
-try:
-  import regex
-except: # this is way worse than, say, https://packaging.python.org/en/latest/specifications/inline-script-metadata/, for example.
-  os.system("pip install regex")
-  import regex
+import regex
 
 def eprint(*args, **kwargs):
   print(f"line {line_index}:",*args, file=sys.stderr, **kwargs)
