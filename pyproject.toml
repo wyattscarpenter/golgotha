@@ -1,6 +1,6 @@
 [project]
 name = "golgotha"
-version = "0.0.4"
+version = "0.0.5"
 dependencies = ["regex"]
 requires-python = ">= 3"
 authors = [
@@ -31,9 +31,6 @@ Repository = "https://github.com/wyattscarpenter/golgotha.git"
 Issues = "https://github.com/wyattscarpenter/golgotha/issues"
 
 [project.scripts]
-golgotha = "golgotha:main"
-
-[project.gui-scripts]
 golgotha = "golgotha:main"
 
 [project.optional-dependencies]
