@@ -1,2 +1,5 @@
 dist/
 golgotha.egg-info/
+__pycache__/
+
+golgotha.test.txt

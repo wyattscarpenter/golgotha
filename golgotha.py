@@ -60,5 +60,5 @@ def main():
             source_string = regex.sub(rule[0], rule[1], source_string)
           outfile.write(source_string)
 
-if __name__ == "__main__"
+if __name__ == "__main__":
   main()
