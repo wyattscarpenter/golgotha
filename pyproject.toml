@@ -35,4 +35,4 @@ golgotha = "golgotha:main"
 
 [project.optional-dependencies]
 # these packages will let you actually build this python program. Also, my build system is just running pypi.bat.
-dev = ["types-regex", "ruff", "mypy", "pyright"] #these are just my dev dependencies... I put them all in the pipeline for the build so they can all check the correctness of the program. You should also have git installed (to use the git diff, and optionally wsl (to run sdiff on windows) (Windows-Subsystem-for-Linux — not to be confused with apt's wsl, which is different), and also https://github.com/wyattscarpenter/gyatt — but there is no way to notate that.
+dev = ["types-regex", "ruff", "mypy", "pyright"] #these are just my dev dependencies... I put them all in the pipeline for the build so they can all check the correctness of the program. You should also have git installed (to use the git diff, and optionally wsl (to run sdiff on windows) (Windows-Subsystem-for-Linux — not to be confused with apt's wsl, which is different) — but there is no way to notate that.
