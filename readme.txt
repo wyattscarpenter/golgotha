@@ -21,6 +21,8 @@ All Golgotha rules must start on a new line, and begin with 🔣. They are termi
 
 Golgotha processing of the source text is double-pass, so Golgotha rules are applied in the source text even before they are specified in the text. However, Golgotha rules are still applied in the ORDER they are specified, so you should put more specific forms first such that they are applied before more general forms. If you have both a $ and a $= operator, specify the $= first.
 
+Golgotha takes multiple files (and/or stdin, which outputs to stdout); however, the rules from each file are isolated to it.
+
 Golgotha has no concept of precedence. This is because it is permissible to apply Golgotha rules to a language text that already has infix operators, and we don't want you to have to respecify those to get correct precedence behavior overall. Therefore all transformations must be fully parenthesized, unless you want the default behavior, which is just always operating on the closest "word" strings. Golgotha has an inherent idea of what characters parenthesize in the sense above. These "parenthors" are (), [], and {}.
 
 In classic applications, word characters would be defined as the alphanumerounderscorics. However, since we live in the future, they're probably actually defined as anything Unicode thinks of as a letter, a digit, or a connector (which includes underscores). For convenience, Golgotha also includes "." as a word character, due to the popularity of that character as the "dot" member access operator (not to be confused with any "dot" scalar product operator), so that eg person1.name ∘ person2.name operates on both of those entities as intended, and not on "name" and "person2" alone.
@@ -40,3 +42,9 @@ Golgotha is intentionally non-Turing-complete. While Golgotha exposes powerful r
 This Golgotha (name picked at random) is not to be confused with the R Natural Language Processing package Golgotha https://github.com/bnosac/golgotha nor the video game / game engine Golgotha https://github.com/videogamepreservation/golgotha / https://github.com/pgrawehr/golgotha
 
 The slogan of this Golgotha is "Because Jesus died for your syn... tax", but this thoroughly lame pun was considered well after the name was finalized.
+
+This project is available both on GitHub and PyPi
+
+GitHub: https://github.com/wyattscarpenter/golgotha
+
+PyPi: https://pypi.org/project/golgotha/
