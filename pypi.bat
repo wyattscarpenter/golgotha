@@ -1,4 +1,3 @@
 pip install -U build twine
 python -m build
-cd dist/
-twine upload *
+twine upload --skip-existing dist/*
