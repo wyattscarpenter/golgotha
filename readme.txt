@@ -19,6 +19,8 @@ Most of the time, you'll want the golgotha rule to be as small as possible, and 
 
 All Golgotha rules must start on a new line, and begin with 🔣. They are terminated by a newline as well. Other whitespace is not stripped, although the golgotha rule will be interpreted as though each argument may be surrounded by arbitrary amounts of whitespace, which follow them through transformations. Arguments are represented in the rules by numbers (strings of contiguous numerical digit characters [0-9]).
 
+Note that the whitespace-retention rules can be initially counter-intuitive. For example, with a rule like 🔣1$2🔜2-1 as before, the sentence "I gave him x$y apples" would become "I gave himy - xapples"; there is whitespace after the x and before the y in the sentence, and so the same thing happens in the result. (Similar to that old observation that )(() is a palindrome but ()() is not — if you agree with that definition of palindrome, I guess.) meanwhile, the rule 🔣 1$2 🔜 2-1  would produce "I gave him y-x apples", but then "I gave him (x$y) apples" is out of luck...
+
 Golgotha processing of the source text is double-pass, so Golgotha rules are applied in the source text even before they are specified in the text. However, Golgotha rules are still applied in the ORDER they are specified, so you should put more specific forms first such that they are applied before more general forms. If you have both a $ and a $= operator, specify the $= first.
 
 Golgotha takes multiple files (and/or stdin, which outputs to stdout); however, the rules from each file are isolated to it.

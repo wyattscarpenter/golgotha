@@ -21,3 +21,17 @@ do some stuff
 1$2
 come$to
 1⋅2
+
+Another example, regarding counterintuitive whitespace.
+🔣1??2🔜2::1
+
+I gave him x??y apples
+
+🔣 1???2 🔜 2:::1 
+(sadly, the previous line ends in whitespace, which everyone hates)
+I gave him x???y apples
+
+But that means this won't change:
+
+I gave him (x???y) apples
+
