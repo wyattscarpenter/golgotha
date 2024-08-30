@@ -1,6 +1,6 @@
 [project]
 name = "golgotha"
-version = "1.0.0"
+version = "1.0.1"
 dependencies = ["regex"]
 requires-python = ">= 3"
 authors = [
@@ -10,7 +10,7 @@ maintainers = [
   {name = "Wyatt S Carpenter"}
 ]
 description = "A preprocessor to define new operators in any programming language."
-readme = "readme.txt"
+readme = "readme.md"
 keywords = ["preprocessor", "operators", "infix", "prefix", "postfix", "syntax", "💀", "🔣"]
 classifiers = [
   "Development Status :: 5 - Production/Stable",
