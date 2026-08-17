@@ -5,17 +5,20 @@ import sys
 
 import regex
 
+# This listing works around https://github.com/python/mypy/issues/5732
+current_infile_name: str
+line_index: int
 
-def eprint(*args, **kwargs):
+def eprint(*args, **kwargs) -> None:
   print(f"{current_infile_name}:{line_index}:", *args, file=sys.stderr, **kwargs)
 
 debug = False #False #True #these values here for easy copying
 
-def dprint(*args, **kwargs):
+def dprint(*args, **kwargs) -> None:
   if debug:
     eprint(*args, **kwargs)
 
-def parenthor(left, right, name=r"recursor\1"):
+def parenthor(left, right, name=r"recursor\1") -> str:
   l = re.escape(left)
   r = re.escape(right)
   p = "%s[^%s%s]*(?&%s)?[^%s%s]*%s" % (l, l, r, name, l, r, r)
@@ -24,11 +27,11 @@ def parenthor(left, right, name=r"recursor\1"):
 
 def golgothate(infile, outfile) -> None:
   global line_index
-  line_index = 1 #type: ignore[name-defined] # https://github.com/python/mypy/issues/5732
+  line_index = 1
   source_string = ""
   operator_rules = []
   for line in infile:
-    line_index += 1 #type: ignore[name-defined] # https://github.com/python/mypy/issues/5732
+    line_index += 1
     if line[0] == '🔣':
       #reading comprehension warning: this code contains regex operations on text that will be used for regex operations later. So, be wary of that.
       dprint("operator rule line encountered")
@@ -58,7 +61,7 @@ def golgothate(infile, outfile) -> None:
     source_string = regex.sub(rule[0], rule[1], source_string)
   outfile.write(bytes(source_string, encoding='utf-8'))
 
-def main():
+def main() -> None:
   global current_infile_name
   if not sys.stdin.isatty(): #this means something is being piped to stdin
     current_infile_name = 'Standard In'
