@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 
-import sys
 import re
+import sys
+
 import regex
+
 
 def eprint(*args, **kwargs):
   print(f"{current_infile_name}:{line_index}:", *args, file=sys.stderr, **kwargs)
@@ -65,7 +67,7 @@ def main():
   else:
     if len(sys.argv) <= 1:
       print("USAGE: golgotha names_of_files_to_tranform... (or use stdin, which will then go to stdout)", file=sys.stderr)
-      exit(2)
+      sys.exit(2)
   for filename in sys.argv[1:]:
     current_infile_name = filename
     with open("golgotha."+filename, "wb") as outfile:

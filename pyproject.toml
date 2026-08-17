@@ -1,6 +1,6 @@
 [project]
 name = "golgotha"
-version = "1.0.2"
+version = "1.1.0"
 dependencies = ["regex"]
 requires-python = ">= 3"
 authors = [
@@ -16,13 +16,12 @@ classifiers = [
   "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Intended Audience :: Developers",
-  "License :: CC0 1.0 Universal (CC0 1.0) Public Domain Dedication",
-  "License :: OSI Approved :: MIT No Attribution License (MIT-0)", # The text of this license is not included in the repo, but I, Wyatt Carpenter, agree to license the project under MIT-0 as well as CC0.
   "Programming Language :: Python :: 3",
   "Topic :: Software Development :: Build Tools",
   "Topic :: Software Development :: Code Generators",
   "Topic :: Software Development :: Pre-processors",
 ]
+license = "CC0-1.0 AND MIT-0"
 
 [project.urls]
 Homepage = "https://github.com/wyattscarpenter/golgotha"
@@ -33,6 +32,7 @@ Issues = "https://github.com/wyattscarpenter/golgotha/issues"
 [project.scripts]
 golgotha = "golgotha:main"
 
-[project.optional-dependencies]
-# these packages will let you actually build this python program. Also, my build system is just running pypi.bat.
-dev = ["types-regex", "ruff", "mypy", "pyright"] #these are just my dev dependencies... I put them all in the pipeline for the build so they can all check the correctness of the program. You should also have git installed (to use the git diff, and optionally wsl (to run sdiff on windows) (Windows-Subsystem-for-Linux — not to be confused with apt's wsl, which is different) — but there is no way to notate that.
+[dependency-groups]
+# These "dev" packages will let you actually build (and test) this python program. Also, my build system is just running `uv run ./pypi.bat` — which runs check.bat first and stops if it fails, which is the important part. I put all correctness checks in the pipeline for the build so they can all check the correctness of the program before it gets distributed. The final part of the build process also seems to install "setuptools >= 40.8.0" multiple times during the build/twine step, probably for isolation/reproducibility purposes.
+# You should also have git installed, as the test script uses git diff; and optionally wsl (Windows-Subsystem-for-Linux — not to be confused with apt's wsl, which is different) which allows you to run sdiff on Windows. But there is no way to notate those requirements. Arguably I should get rid of these requirements and just use some python-native (s)diffing package, but I don't feel like changing that is worth my time at the moment.
+dev = ["types-regex", "ruff", "mypy", "pyright", "build", "twine"]
